@@ -1,0 +1,9 @@
+<%- include("partials/header")%>
+
+<h1>Book the seat</h1>
+<form action="/confirm/<%=seat._id%>/<%=seat.bus_id%>?_method=PUT" method="POST">
+    <!-- <input type="text" name="seat[user_name]" value="<%=seat.no%>" readonly="readonly"> -->
+    <label for="">Seat no <%=seat.no%></label>
+    <button>confirm</button>
+</form>
+<%- include("partials/footer") %>

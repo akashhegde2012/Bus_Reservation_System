@@ -1,0 +1,19 @@
+<%- include("partials/header")%>
+
+<% bus.forEach(function(bus){%>
+
+       <div class="col-md-3 col-sm-6">
+           <div class="thumbnail">
+                <img src="<%=bus.image%>" alt="">
+                <div class="caption">
+                    <h4><%= bus.name %></h4>
+                </div>
+                <p><a href="/bus/<%=bus._id%>" class="btn btn-primary">see seats</a></p>
+           </div>  
+       </div>
+       <!-- <%bus.chair.forEach(function(seat){%>
+            <button><%=seat%></button><a href="/seat/<%=seat._id%>/edit">book <%=seat.user_name%></a>
+    <%});%> -->
+
+<%})%>
+<%- include("partials/footer") %>

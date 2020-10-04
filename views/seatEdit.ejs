@@ -1,0 +1,7 @@
+<%- include("partials/header")%>
+<h1>Book the seat</h1>
+<form action="/seat/<%=seat._id%>/<%=seat.bus_id%>?_method=PUT" method="POST">
+    <input type="text" name="seat[user_name]" placeholder="username">
+    <input type="submit">
+</form>
+<%- include("partials/footer") %>

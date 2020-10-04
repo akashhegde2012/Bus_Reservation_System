@@ -1,0 +1,33 @@
+<%- include("partials/header")%>
+<!-- <meta http-equiv="refresh" content="1"> -->
+
+<div class="container">
+    <div class="row">
+        <div style="width: 30%; margin: 25px auto;"></div>
+        <% for (var i=0;i < 10; i++){%>
+            <div>
+                <button><%-i+1%> </button>
+                <% if(bus.chair[i].user_name.length>0){%>
+                    Booked by <%=bus.chair[i].user_name%>
+                    <a href="/seat/<%=bus.chair[i]._id%>/edit">cancel</a>
+                    <%} else{%>
+                <a href="/seat/<%=bus.chair[i]._id%>/edit">select seat</a>
+                <%}%>
+            </div>
+            
+        <%  }%>
+        <a href="/bus">Go back</a>
+        <!-- <input type="button" value = "Refresh" onclick="history.go(0)" /> -->
+        <script>
+            window.onload = function() {
+            if(!window.location.hash) {
+            window.location = window.location + '#loaded';
+            window.location.reload();
+            }
+        }
+        </script>
+    </div>
+</div>
+</div>
+   
+<%- include("partials/footer") %>
