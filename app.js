@@ -67,39 +67,39 @@ var bus_schema=new mongoose.Schema({
     chair:[seat_schema]
 });
 var Bus = mongoose.model('Bus',bus_schema);
-var newBus=new Bus(
-    {name:'Bus 2',
-    // image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTtQSvkdqsnHrr7Dnm5J2Omx_YbXBf-25WcbQ&usqp=CAU'
-     //image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQbqs9y9nTCCv-W3TX_6Y2ADL3dlngzgwdJpQ&usqp=CAU'
-    //image:'https://akm-img-a-in.tosshub.com/indiatoday/images/story/202008/londel.jpeg?gpbctu1f7afh.dBf15gkuEFvySVaszRN&size=770:433'
-    image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSytXolTsSoS57ZaYwuYpxIrC5_thdp0RxrgA&usqp=CAU'
+// var newBus=new Bus(
+//     {name:'Bus 3',
+//     // image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTtQSvkdqsnHrr7Dnm5J2Omx_YbXBf-25WcbQ&usqp=CAU'
+//      //image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQbqs9y9nTCCv-W3TX_6Y2ADL3dlngzgwdJpQ&usqp=CAU'
+//     image:'https://akm-img-a-in.tosshub.com/indiatoday/images/story/202008/londel.jpeg?gpbctu1f7afh.dBf15gkuEFvySVaszRN&size=770:433'
+//     //image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSytXolTsSoS57ZaYwuYpxIrC5_thdp0RxrgA&usqp=CAU'
    
 
-});
-newSeat=[];
-for (var i=0;i<10;i++)
-{
-    var seat=new Seat(
-        {
-            bus_id:newBus._id,
-            user_name:'',
-            no:i+1
-        }
-    );
-    newSeat[i]=seat;
-    // newBus.chair.push(newSeat);
-     seat.save((err,seat)=>{
-         // console.log(seat);
+// });
+// newSeat=[];
+// for (var i=0;i<10;i++)
+// {
+//     var seat=new Seat(
+//         {
+//             bus_id:newBus._id,
+//             user_name:'',
+//             no:i+1
+//         }
+//     );
+//     newSeat[i]=seat;
+//     // newBus.chair.push(newSeat);
+//      seat.save((err,seat)=>{
+//          // console.log(seat);
         
         
-     });
-     newSeat[i]=seat;
+//      });
+//      newSeat[i]=seat;
 
-}
-newBus.chair=newSeat
-newBus.save((err,bus)=>{
-    console.log(bus);
-});
+// }
+// newBus.chair=newSeat
+// newBus.save((err,bus)=>{
+//     console.log(bus);
+// });
 
 
 
