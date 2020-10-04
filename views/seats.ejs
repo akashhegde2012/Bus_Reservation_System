@@ -9,14 +9,19 @@
                 <button><%-i+1%> </button>
                 <% if(bus.chair[i].user_name.length>0){%>
                     Booked by <%=bus.chair[i].user_name%>
-                    <a href="/seat/<%=bus.chair[i]._id%>/edit">cancel</a>
+                    <%if(currentUser && bus.chair[i].owner.id.equals(currentUser._id)){%>
+                        <form action="/seat/<%=bus.chair[i]._id%>/<%=bus.chair[i].bus_id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Cancel</button>
+                        </form>
+                    <%}%>
+                    <!-- <a href="/seat/<%=bus.chair[i]._id%>/<%=bus.chair[i].bus_id%>">cancel</a> -->
                     <%} else{%>
                 <a href="/seat/<%=bus.chair[i]._id%>/edit">select seat</a>
                 <%}%>
             </div>
             
         <%  }%>
-        <a href="/bus">Go back</a>
+        <a href="/bus" class="btn btn-success">Go back</a>
         <!-- <input type="button" value = "Refresh" onclick="history.go(0)" /> -->
         <script>
             window.onload = function() {
