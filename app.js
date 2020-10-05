@@ -23,8 +23,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(function(req,res,next){
     res.locals.currentUser=req.user;
-    next()
-})
+    next();
+});
 
 app.set('view engine','ejs');
 mongoose.set('useNewUrlParser', true);
@@ -33,18 +33,12 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 // Local server
-// mongoose.connect('mongodb://localhost/bus_system');
+mongoose.connect('mongodb://localhost/bus_system');
 
 // online server
-mongoose.connect("mongodb+srv://akashhegde2012:Akash2012$@cluster0.lz6jd.mongodb.net/bus_system?retryWrites=true&w=majority").then(() =>{
-   console.log('connected to db');
-}).catch(err =>{
-   console.log('error',err.message);
-});
+
 
 // schema
-
-
 var seat_schema=new mongoose.Schema({
     bus_id:mongoose.Schema.Types.ObjectId,
     user_name:String,
@@ -59,8 +53,6 @@ var seat_schema=new mongoose.Schema({
 
 });
 var Seat = mongoose.model('Seat',seat_schema);
-
-
 var bus_schema=new mongoose.Schema({
     name:String,
     image:String,
@@ -74,7 +66,6 @@ var Bus = mongoose.model('Bus',bus_schema);
 //     image:'https://akm-img-a-in.tosshub.com/indiatoday/images/story/202008/londel.jpeg?gpbctu1f7afh.dBf15gkuEFvySVaszRN&size=770:433'
 //     //image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSytXolTsSoS57ZaYwuYpxIrC5_thdp0RxrgA&usqp=CAU'
    
-
 // });
 // newSeat=[];
 // for (var i=0;i<10;i++)
@@ -100,28 +91,26 @@ var Bus = mongoose.model('Bus',bus_schema);
 // newBus.save((err,bus)=>{
 //     console.log(bus);
 // });
-
-
-
+//Landing page
 app.get('/',(req,res)=>{
     res.render('landing');
 
 });
-
+// bus page
 app.get('/bus',(req,res)=>{
     Bus.find({},(err,allBus)=>{
 
             res.render('bus',{bus:allBus});
     });
 });
+//displaying seats
 app.get('/bus/:id',(req,res)=>{
 
     Bus.findById(req.params.id,(err,foundBus)=>{
         res.render('seats',{bus:foundBus})
     });
 }); 
-
-//edit
+//edit book seat
 app.get('/seat/:id/edit',isLoggedIn,(req,res)=>{
     Seat.findById(req.params.id,(err,foundSeat)=>{
         res.render('seatEdit',{seat:foundSeat}) ;
@@ -166,6 +155,7 @@ app.put('/confirm/:id/:bus_id',isLoggedIn,(req,res)=>{
     });
 
 });
+//cancell seat
 app.delete('/seat/:id/:bus_id',checkUser,(req,res)=>{
     var seatno=0
     Seat.findById(req.params.id,(err,deleteSeat)=>{
@@ -232,7 +222,7 @@ app.get('/logout',(req,res)=>{
     req.logout();
     res.redirect('/');
 });
-
+// middleware to check whether user owns the seat
 function checkUser(req,res,next){
     if (req.isAuthenticated()){
         Seat.findById(req.params.id,(err,foundSeat)=>{
@@ -251,7 +241,7 @@ function checkUser(req,res,next){
         });
     }
 }
-
+//middleware to check whether user is logged in
 function isLoggedIn(req,res,next){
     if (req.isAuthenticated()){
         return next();
