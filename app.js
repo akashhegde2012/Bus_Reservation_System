@@ -33,7 +33,13 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 // Local server
-mongoose.connect('mongodb://localhost/bus_system');
+// mongoose.connect('mongodb://localhost/bus_system');
+
+mongoose.connect("mongodb+srv://akashhegde2012:Akash2012$@cluster0.lz6jd.mongodb.net/bus_system?retryWrites=true&w=majority").then(() =>{
+   console.log('connected to db');
+}).catch(err =>{
+   console.log('error',err.message);
+});
 
 // online server
 
